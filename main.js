@@ -46,7 +46,9 @@ function renderResults(items) {
           <p>${description}</p>
         </div>
       </div>
+      <h2>
       <iframe width="642" height="361" src="https://www.youtube.com/embed/${videoId}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </h2>
     `;
 
         results.insertAdjacentHTML('beforeend', html);
