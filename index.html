@@ -93,44 +93,19 @@
       };
     </script>
   </body>
-<style>
-.searchbox {
-  position: relative;
-  width: 200px;
-  height: 40px;
-}
-.searchbox a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-}
-.searchbox input {
-  position: absolute;
-  top: 0;
-  left: -200px;
-  width: 200px;
-  height: 40px;
-  border: none;
-  outline: none;
-  padding-left: 10px;
-  background-color: #eee;
-  transition: all .5s ease-in-out;
-}
-.searchbox input:focus {
-  left: 0;
-}
-  }
-</style>
-<div class="searchbox">
-<a href="#"><img src="icon.png" alt="虫眼鏡"></a>
-<input type="text" name="search" id="search-box" placeholder="検索ワード入力">
-</div>
+<body>
+	<input type="search" id="search-box" name="q" placeholder="検索...">
+</body>
   <div id="results"></div>
 <style>
+#search-box {
+  width: 300px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+}
 h1 {
   position: relative;
   color: #158b2b;
