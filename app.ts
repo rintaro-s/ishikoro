@@ -1,84 +1,66 @@
-      var openModal = document.getElementById("open-modal");
-      var modal = document.getElementById("modal");
-      var closeBtn = document.getElementById("close");
-      
-      openModal.onclick = function() {
-        modal.style.display = "block";
-      };
-      
-      closeBtn.onclick = function() {
-        modal.style.display = "none";
-      };
-const toggleBtn = document.getElementById("mode-toggle");
+// 型定義を追加
+const openModal = document.getElementById("open-modal") as HTMLElement | null;
+const modal = document.getElementById("modal") as HTMLElement | null;
+const closeBtn = document.getElementById("close") as HTMLElement | null;
+const toggleBtn = document.getElementById("mode-toggle") as HTMLElement | null;
 const body = document.body;
+const searchBox = document.getElementById('search-box') as HTMLInputElement | null;
+const results = document.getElementById('results') as HTMLElement | null;
 
-toggleBtn.addEventListener("click", function() {
-	body.classList.toggle("dark-mode");
-});
-// APIキーを設定
-const API_KEY = 'AIzaSyDfFr3mb1R0EhvZ8MfbvYH4jC7QWh8658A';
+// モーダルの開閉処理
+if (openModal && modal && closeBtn) {
+    openModal.onclick = function () {
+        modal.style.display = "block";
+    };
+    
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+}
 
-// エンドポイントURLを設定
-const ENDPOINT_URL = 'https://www.googleapis.com/youtube/v3/search';
-const searchBox = document.getElementById('search-box');
-const results = document.getElementById('results');
+// モード切替の処理
+if (toggleBtn) {
+    toggleBtn.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+    });
+}
 
-searchBox.addEventListener('change', (event) => {
-    const query = event.target.value;
+// APIキーとエンドポイントURLの設定
+const API_KEY: string = 'AIzaSyDfFr3mb1R0EhvZ8MfbvYH4jC7QWh8658A';
+const ENDPOINT_URL: string = 'https://www.googleapis.com/youtube/v3/search';
 
-    // APIリクエストを作成
-    const request = `${ENDPOINT_URL}?part=snippet&q=${query}&type=video&key=${API_KEY}`;
+// APIリクエストと結果表示処理
+if (searchBox && results) {
+    searchBox.addEventListener('change', (event) => {
+        const target = event.target as HTMLInputElement;
+        const query: string = target.value;
+        
+        // APIリクエストの作成
+        const request: string = `${ENDPOINT_URL}?part=snippet&q=${query}&type=video&key=${API_KEY}`;
+        
+        // APIリクエストの送信
+        fetch(request)
+            .then(response => response.json())
+            .then((data: { items: any[] }) => {
+                const items = data.items;
+                renderResults(items);
+            });
+    });
+}
 
-    // APIリクエストを送信
-    fetch(request)
-        .then(response => response.json())
-        .then(data => {
-            const items = data.items;
-            renderResults(items);
-        });
-});
-function renderResults(items) {
+// 検索結果の表示
+function renderResults(items: any[]) {
+    if (!results) return;
+
     results.innerHTML = '';
 
     items.forEach(item => {
         // 動画タイトルと説明を取得
-        const title = item.snippet.title;
-        const description = item.snippet.description;
+        const title: string = item.snippet.title;
+        const description: string = item.snippet.description;
 
         // 動画IDを取得
-        const videoId = item.id.videoId;
+        const videoId: string = item.id.videoId;
 
         // 動画サムネイルのURLを取得
-        const thumbnailUrl = item.snippet.thumbnails.medium.url;
-
-        // 動画のダウンロードリンクを作成
-        const downloadLink = `<a href="https://www.youtube.com/watch?v=${videoId}&feature=youtu.be" download>${title}</a>`;
-
-        // HTMLを作成
-        const html = `
-      <div>
-        <img src="${thumbnailUrl}">
-        <div>
-          <h2>${downloadLink}</h2>
-          <p>${description}</p>
-        </div>
-      </div>
-      <h2>
-      <iframe width="642" height="361" src="https://www.youtube.com/embed/${videoId}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </h2>
-    `;
-
-        results.insertAdjacentHTML('beforeend', html);
-    });
-}
- function addShapes() {
-      const container = document.querySelector('.container');
-      for (let i = 0; i < 6; i++) {
-        const shape = document.createElement('div');
-        shape.classList.add('shape');
-        shape.style.animationDelay = `${i * 0.3}s`;
-        container.appendChild(shape);
-      }
-    }
-
-    addShapes();
+       
