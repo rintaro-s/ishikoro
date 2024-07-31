@@ -1,6 +1,313 @@
-<head>石ころビューアーVr,1.0.1</head>
-<body>
-<input type="text" id="search-box" placeholder="検索する用語を入力してください">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="name:石ころビューアー author:rinta">
+  <meta property="og:title" content="石ころビューアー">
+  <meta property="og:description" content="name:石ころビューアー author:rinta">
+  <meta property="og:site_name" content="石ころビューアー">
+  <meta property="og:url" content="https://rintaro-s.github.io/ishikoro/">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" sizes="180x180">
+<h1>石ころビューアーVr,1.3.0</h1>
+<head>
+	<title>石ころビューアー</title>
+</head>
+<style>
+  /* ボタンのスタイルを設定 */
+  button {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    background-color: lightblue;
+    border: none;
+    border-radius: 48px;
+  }
+
+  /* ボタン同士の間隔を設定 */
+  button + button {
+    margin-left: 30px;
+  }
+</style>
+<body id=dark>
+	<button id="mode-toggle"> ダークモード</button>
 </body>
-<div id="results"></div>
-<script type="text/javascript" src="main.js"></script>
+<body>
+	<button onclick="location.href='https://rintaro-s.github.io/unity-test/'">ボールを落とすな！(自作ミニゲーム)'"</button>
+</body>
+  <head>
+    <style>
+      #modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      #modal-content {
+        display: block;
+        position: relative;
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        width: 90%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      }  
+      #close {
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      } 
+    </style>
+  </head>
+  <body>
+    <button id="open-modal">サイトの説明</button>
+    <div id="modal">
+      <div id="modal-content">
+        <span id="close">&times;</span>
+        <p style ="color:black">注意！googleに表示させるようにした代わりにUIがバグりました！頑張って対処します。<br><br>当サイトは、Googleが提供しているyoutubeの動画のサムネイル、タイトル、概要欄の一部が見れるサイトで、環境によってはYoutubeの動画の埋め込みが表示されます。<br><br>また、YouTubeの動画をダウンロード、視聴したい場合は、<A href="https://rintaro-s.github.io/y-dl/index.html">このサイト(https://rintaro-s.github.io/y-dl/index.html)</A>を使用してください<br><br>ざっくりとした説明は、Googleが提供しているyoutubeの動画が見られる「やつ」を使い、html js cssを使い、表示しています。<br><br>詳しい説明(developer向け)は、Googleが提供しているyoutubeの動画情報が取得できるapi、youtube data api v3を使い、google cloudでapiキーを取得し、javascriptでyoutube data api v3のエンドポイントURLを指定し、APIリクエストをapiキーを使って有効化し、各動画情報を閲覧すると言った仕組みです<br><br>このコードはGitHub上で閲覧できます。また、このサービスを通して当社は本サイト掲載情報の利用によって利用者等に何らかの損害が発生したとしても、かかる損害については一切の責任を負いません。<br><br>本サイトは「りんた」によって作成されました。連絡については、discordの、<A href="https://discord.gg/DxEungZpce">私のdiscordサーバー(https://discord.gg/DxEungZpce)</A> または、raindrop#7658までお気軽にご連絡ください。<br><br>変更ログ：googleで検索できるようになりました！（多分）<br>既存のバグが修正されました<br>googleのサイトテストで満点を取りました！</p>
+      </div>
+    </div>
+    <script>
+      var openModal = document.getElementById("open-modal");
+      var modal = document.getElementById("modal");
+      var closeBtn = document.getElementById("close");
+      
+      openModal.onclick = function() {
+        modal.style.display = "block";
+      };
+      
+      closeBtn.onclick = function() {
+        modal.style.display = "none";
+      };
+    </script>
+  </body>
+<body>
+	<input type="search" id="search-box" name="q" placeholder="検索...">
+</body>
+  <div id="results"></div>
+<style>
+#search-box {
+  width: 300px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+}
+h1 {
+  position: relative;
+  color: #158b2b;
+  font-size: 20px;
+  padding: 10px 0;
+  text-align: center;
+  margin: 1.5em 0;
+}
+h1:before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 150px;
+  height: 58px;
+  border-radius: 50%;
+  border: 5px solid #a6ddb0;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.dark {
+	background-color: #F0F8FF; /* default light mode background color */
+	color: #000000; /* default light mode text color */
+}
+
+.dark-mode {
+	background-color: #1E1E1E; /* dark mode background color */
+	color: #FFFFFF; /* dark mode text color */
+}
+.mode-toggle {
+    position: fixed;
+    top: 30%;
+    left: 15%;
+    width: 25%;
+    transform: translate(-50%, -50%);
+  }
+
+ .results {
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+<script>
+const toggleBtn = document.getElementById("mode-toggle");
+const body = document.body;
+
+toggleBtn.addEventListener("click", function() {
+	body.classList.toggle("dark-mode");
+});
+// APIキーを設定
+const API_KEY = 'AIzaSyDfFr3mb1R0EhvZ8MfbvYH4jC7QWh8658A';
+
+// エンドポイントURLを設定
+const ENDPOINT_URL = 'https://www.googleapis.com/youtube/v3/search';
+const searchBox = document.getElementById('search-box');
+const results = document.getElementById('results');
+
+searchBox.addEventListener('change', (event) => {
+    const query = event.target.value;
+
+    // APIリクエストを作成
+    const request = `${ENDPOINT_URL}?part=snippet&q=${query}&type=video&key=${API_KEY}`;
+
+    // APIリクエストを送信
+    fetch(request)
+        .then(response => response.json())
+        .then(data => {
+            const items = data.items;
+            renderResults(items);
+        });
+});
+function renderResults(items) {
+    results.innerHTML = '';
+
+    items.forEach(item => {
+        // 動画タイトルと説明を取得
+        const title = item.snippet.title;
+        const description = item.snippet.description;
+
+        // 動画IDを取得
+        const videoId = item.id.videoId;
+
+        // 動画サムネイルのURLを取得
+        const thumbnailUrl = item.snippet.thumbnails.medium.url;
+
+        // 動画のダウンロードリンクを作成
+        const downloadLink = `<a href="https://www.youtube.com/watch?v=${videoId}&feature=youtu.be" download>${title}</a>`;
+
+        // HTMLを作成
+        const html = `
+      <div>
+        <img src="${thumbnailUrl}">
+        <div>
+          <h2>${downloadLink}</h2>
+          <p>${description}</p>
+        </div>
+      </div>
+      <h2>
+      <iframe width="642" height="361" src="https://www.youtube.com/embed/${videoId}" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </h2>
+    `;
+
+        results.insertAdjacentHTML('beforeend', html);
+    });
+}
+</script>
+</head>
+<head>
+  <style>
+    body {
+      background-color: #00ccff;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .shape {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #00bfff;
+      animation: moveShape 6s infinite linear alternate, rotateShape 10s infinite linear;
+      transform-origin: center;
+    }
+
+    .shape:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      background-color: #0066cc;
+      animation: moveShape 8s infinite linear alternate, rotateShape 12s infinite linear;
+    }
+
+    .shape:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      background-color: #0099ff;
+      animation: moveShape 4s infinite linear alternate, rotateShape 8s infinite linear;
+    }
+
+    @keyframes moveShape {
+      0% {
+        left: 0;
+        top: 0;
+      }
+      25% {
+        left: calc(100% - 100px);
+        top: 0;
+      }
+      50% {
+        left: calc(100% - 100px);
+        top: calc(100% - 100px);
+      }
+      75% {
+        left: 0;
+        top: calc(100% - 100px);
+      }
+      100% {
+        left: 0;
+        top: 0;
+      }
+    }
+
+    @keyframes rotateShape {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <script>
+    function addShapes() {
+      const container = document.querySelector('.container');
+      for (let i = 0; i < 6; i++) {
+        const shape = document.createElement('div');
+        shape.classList.add('shape');
+        shape.style.animationDelay = `${i * 0.3}s`;
+        container.appendChild(shape);
+      }
+    }
+
+    addShapes();
+  </script>
+</body>
+</html>
